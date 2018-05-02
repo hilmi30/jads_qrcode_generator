@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">J-Ads QR Code Generator</string>
+    <string name="masukkan_string">Masukkan String</string>
+    <string name="buat_qr_code">Buat QR Code</string>
+    <string name="hapus">Hapus</string>
+    <string name="simpan_qr_code">Simpan QR Code</string>
+    <string name="keys">keys</string>
+    <string name="keys_length">keys length</string>
+    <string name="encrypt_length">encrypt length</string>
+</resources>
