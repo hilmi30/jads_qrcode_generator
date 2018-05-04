@@ -20,6 +20,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import android.graphics.drawable.BitmapDrawable
+import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         hapusBtn?.setOnClickListener {
-            kataString?.text?.clear()
+            kataString?.setText(R.string.https)
             qrCodeImg?.visibility = View.GONE
             simpanQrCodeBtn?.visibility = View.GONE
         }
@@ -104,6 +105,8 @@ class MainActivity : AppCompatActivity() {
             file.createNewFile()
             fileOutputStream = FileOutputStream(file)
             fileOutputStream.write(bytes.toByteArray())
+
+            MediaScannerConnection.scanFile(this, arrayOf(file.absolutePath), null, null)
             Toast.makeText(this, file.absolutePath, Toast.LENGTH_LONG).show()
         } catch (e: IOException) {
             e.printStackTrace()
@@ -125,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
         val multiFormatWriter = MultiFormatWriter()
         try {
-            val bitMatrix = multiFormatWriter.encode(finalText, BarcodeFormat.QR_CODE, 300, 300)
+            val bitMatrix = multiFormatWriter.encode(finalText, BarcodeFormat.QR_CODE, 600, 600)
             val barcodeEncoder = BarcodeEncoder()
             val bitmap = barcodeEncoder.createBitmap(bitMatrix)
             qrCodeImg?.visibility = View.VISIBLE

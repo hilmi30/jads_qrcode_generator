@@ -8,7 +8,13 @@
     tools:context=".MainActivity"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/url_wajib_diawali_dengan_https"/>
+
     <EditText
+        android:text="@string/https"
         android:id="@+id/string_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

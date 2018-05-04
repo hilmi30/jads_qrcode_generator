@@ -7,4 +7,6 @@
     <string name="keys">keys</string>
     <string name="keys_length">keys length</string>
     <string name="encrypt_length">encrypt length</string>
+    <string name="https">https://</string>
+    <string name="url_wajib_diawali_dengan_https">URL wajib diawali dengan https://</string>
 </resources>
