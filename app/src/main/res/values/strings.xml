@@ -8,5 +8,35 @@
     <string name="keys_length">keys length</string>
     <string name="encrypt_length">encrypt length</string>
     <string name="https">https://</string>
-    <string name="url_wajib_diawali_dengan_https">URL wajib diawali dengan https://</string>
+    <string name="url_wajib_diawali_dengan_https">URL wajib diawali dengan https:// atau http://</string>
+    <string name="masukkan_nama_qrcode">Nama QRCode</string>
+    <string name="masukkan_id_iklan">Masukkan ID Iklan</string>
+    <string name="kategori_iklan">Kategori Iklan</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="nomor_telp">Nomor Telp</string>
+    <string name="url_iklan">URL Iklan</string>
+    <string name="id_iklan">ID Iklan</string>
+    <string name="kategori">Kategori</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nama_iklan">Nama Iklan</string>
+    <string name="delete">delete</string>
+    <string name="cari_iklan">Cari Iklan</string>
+    <string name="cari">Cari</string>
+    <string name="simpan">Simpan</string>
+    <string name="hapus_iklan">Hapus Iklan</string>
+    <string name="yakin_hapus">Apakah anda yakin ingin menhapus iklan?</string>
+    <string name="ya">Ya</string>
+    <string name="tidak">Tidak</string>
+    <string name="form_tidak_boleh_kosong">Form tidak boleh kosong</string>
+    <string name="simpal_qr_code">Simpan QR Code</string>
+    <string name="yakin_simpan_qr">Yakin ingin menyimpan gambar QR Code?</string>
+    <string name="raw_qrcode">RAW QRCode</string>
+    <string name="copy">Copy</string>
+    <string name="paste">Paste</string>
+    <string name="berhasil_paste">Berhasil di paste</string>
+    <string name="berhasil_copy">Berhasil di copy</string>
+    <string name="berhasil_simpan">Berhasil disimpan</string>
 </resources>

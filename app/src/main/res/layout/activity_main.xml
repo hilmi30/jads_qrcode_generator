@@ -1,68 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:padding="16dp">
+    tools:context="com.perusdajepara.jadsqrcode.activity.MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/url_wajib_diawali_dengan_https"/>
-
-    <EditText
-        android:text="@string/https"
-        android:id="@+id/string_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/masukkan_string"
-        android:layout_marginBottom="8dp"/>
-
-    <LinearLayout
-        android:layout_marginBottom="32dp"
-        android:orientation="horizontal"
+    <android.support.design.widget.TabLayout
+        android:background="@color/colorPrimary"
+        app:tabTextColor="@android:color/white"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabSelectedTextColor="@android:color/white"
+        android:id="@+id/main_tab"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/buat_qr_code_btn"
-            style="?android:attr/buttonStyle"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/buat_qr_code"
-            android:textAllCaps="false"/>
+    </android.support.design.widget.TabLayout>
 
-        <Button
-            android:id="@+id/hapus_btn"
-            style="?android:attr/buttonStyle"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hapus"
-            android:textAllCaps="false"/>
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/qr_code_image"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
-        android:contentDescription="@string/buat_qr_code"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
-        android:id="@+id/simpan_qr_code_btn"
-        style="?android:attr/buttonStyle"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_pager"
+        android:layout_above="@id/main_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/simpan_qr_code"
-        android:textAllCaps="false"/>
+        android:layout_height="match_parent">
 
-</LinearLayout>
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>

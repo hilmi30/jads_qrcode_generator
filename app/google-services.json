@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "372059263756",
+    "firebase_url": "https://jeparaadvertiser-58b78.firebaseio.com",
+    "project_id": "jeparaadvertiser-58b78",
+    "storage_bucket": "jeparaadvertiser-58b78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372059263756:android:56c2daac947b1801",
+        "android_client_info": {
+          "package_name": "com.perusdajepara.jadsqrcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372059263756-5ncrs4r96249dk55cpa4hor7c21j1c62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7Vuxfb71mJuEDCAsHQvxAIid2FuC9ZCg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372059263756:android:483b280c5a80d31c",
+        "android_client_info": {
+          "package_name": "com.perusdajepara.jeparaadvertiser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372059263756-386c0mjn6hqa98ll94adhc163mo2b7em.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.perusdajepara.jeparaadvertiser",
+            "certificate_hash": "1ab94ab221aaa79c5a0bce0ba5879cee7cbd9775"
+          }
+        },
+        {
+          "client_id": "372059263756-5ncrs4r96249dk55cpa4hor7c21j1c62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7Vuxfb71mJuEDCAsHQvxAIid2FuC9ZCg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372059263756-5ncrs4r96249dk55cpa4hor7c21j1c62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

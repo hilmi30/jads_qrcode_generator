@@ -1,4 +1,4 @@
-package com.perusdajepara.j_adsqrcodegenerator
+package com.perusdajepara.jadsqrcode
 
 import org.junit.Test
 

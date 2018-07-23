@@ -1,4 +1,4 @@
-package com.perusdajepara.j_adsqrcodegenerator
+package com.perusdajepara.jadsqrcode
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
