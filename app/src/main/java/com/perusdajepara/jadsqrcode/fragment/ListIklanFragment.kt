@@ -26,6 +26,7 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.uiThread
 
 class ListIklanFragment : Fragment() {
@@ -98,7 +99,13 @@ class ListIklanFragment : Fragment() {
                             title = getString(R.string.hapus_iklan)
                             message = getString(R.string.yakin_hapus)
                             positiveButton(getString(R.string.ya)) {
-                                databaseRef.child(Constant.DATA_IKLAN).child(idIklan).removeValue()
+                                databaseRef.child(Constant.DATA_IKLAN).child(idIklan).removeValue().addOnCompleteListener {
+                                    if(it.isSuccessful) {
+                                        toast(getString(R.string.hapus_berhasil))
+                                    } else {
+                                        toast(getString(R.string.terjadi_kesalahan))
+                                    }
+                                }
                             }
                             negativeButton(getString(R.string.tidak)) {
 

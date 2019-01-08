@@ -1,34 +1,33 @@
-package com.perusdajepara.jadsqrcode.fragment
+package com.perusdajepara.jadsqrcode.activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.CLIPBOARD_SERVICE
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.media.MediaScannerConnection
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.perusdajepara.jadsqrcode.Constant
-import com.perusdajepara.jadsqrcode.model.IklanData
 import com.perusdajepara.jadsqrcode.R
+import com.perusdajepara.jadsqrcode.R.id.buat_qr_code_btn
 import com.perusdajepara.jadsqrcode.Validasi
+import com.perusdajepara.jadsqrcode.model.IklanData
 import io.paperdb.Paper
-import kotlinx.android.synthetic.main.fragment_tambah_data.*
+import kotlinx.android.synthetic.main.activity_tambah_iklan.*
 import net.glxn.qrgen.android.QRCode
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
@@ -40,7 +39,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-class TambahIklanFragment : Fragment() {
+class TambahIklanActivity : AppCompatActivity() {
 
     var iv: ByteArray? = null
     var encryption: Encryption? = null
@@ -56,14 +55,12 @@ class TambahIklanFragment : Fragment() {
     private lateinit var nomorTelp: String
     private lateinit var urlIklan: String
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tambah_data, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_tambah_iklan)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        supportActionBar?.title = getString(R.string.tambah_iklan)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         visibility(View.GONE)
         setKategoriSpinner()
@@ -73,13 +70,20 @@ class TambahIklanFragment : Fragment() {
         iv = ByteArray(16)
         encryption = Encryption.getDefault(Constant.KEY, Constant.SALT, iv)
 
-        buat_qr_code_btn?.setOnClickListener {
-            generateQrCode()
+        buat_qr_code_btn.onClick {
+            if(id_iklan.text.isEmpty()) {
+                toast("ID tidak boleh kosong")
+            } else {
+                generateQrCode()
+            }
         }
 
         copy_btn.onClick {
-            Paper.book().write(Constant.CLIPBOARD, finalText)
-            toast(getString(R.string.berhasil_copy))
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("textcopied", finalText)
+            clipboard.primaryClip = clip
+
+            toast("Tersalin")
         }
 
         // simpan qrcode listener
@@ -89,7 +93,6 @@ class TambahIklanFragment : Fragment() {
 
                 namaQR = nama_qrcode.text.toString()
 
-                idIklan = id_iklan.text.toString()
                 namaIklan = nama_iklan.text.toString()
                 urlIklan = link_iklan.text.toString()
 
@@ -103,22 +106,27 @@ class TambahIklanFragment : Fragment() {
                     ctx.toast(getString(R.string.form_tidak_boleh_kosong))
                 }
             } else {
-                ActivityCompat.requestPermissions(ctx as Activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+                ActivityCompat.requestPermissions(this@TambahIklanActivity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
             }
         }
 
         hapus_btn?.setOnClickListener {
-            id_iklan?.text?.clear()
-            nama_qrcode?.text?.clear()
-            nama_iklan.text.clear()
-            lat.text.clear()
-            lng.text.clear()
-            nomor_telp.text.clear()
-            link_iklan.text.clear()
-            raw_qrcode.text.clear()
-
-            visibility(View.GONE)
+            deleteAll()
         }
+    }
+
+    private fun deleteAll() {
+        id_iklan?.text?.clear()
+        nama_qrcode?.text?.clear()
+        nama_iklan.text.clear()
+        lat.text.clear()
+        lng.text.clear()
+        nomor_telp.text.clear()
+        link_iklan.text.clear()
+        raw_qrcode.text.clear()
+        kategoriSpinner.setSelection(0)
+
+        visibility(View.GONE)
     }
 
     private fun setKategoriSpinner() {
@@ -160,22 +168,7 @@ class TambahIklanFragment : Fragment() {
     }
 
     private fun visibility(v: Int) {
-        qr_code_image?.visibility = v
-        simpan_qr_code_btn?.visibility = v
-        nama_qrcode?.visibility = v
-        nama_qrcode?.text = id_iklan.text
-        kategoriSpinner.visibility = v
-        nama_iklan.visibility = v
-        lat.visibility = v
-        lng.visibility = v
-        nomor_telp.visibility = v
-        link_iklan.visibility = v
-        katText.visibility = v
-        raw_qrcode.visibility = v
-        raw_text.visibility = v
-        raw_qrcode.setText(finalText, TextView.BufferType.EDITABLE)
-
-        copy_btn.visibility = v
+        konten.visibility = v
     }
 
     private fun alertSaveImage(){
@@ -185,6 +178,7 @@ class TambahIklanFragment : Fragment() {
             positiveButton(getString(R.string.ya)){
                 saveImageToStorage()
                 saveAdsDataToFirebase()
+                // deleteAll()
             }
             negativeButton(getString(R.string.tidak)){
                 it.dismiss()
@@ -198,7 +192,13 @@ class TambahIklanFragment : Fragment() {
                 namaIklan, nomorTelp, urlIklan, finalText.toString())
 
         val dataIklan = databaseRef.child(Constant.DATA_IKLAN).child(idIklan)
-        dataIklan.setValue(data)
+        dataIklan.setValue(data).addOnCompleteListener {
+            if(it.isSuccessful) {
+                toast(getString(R.string.berhasil_menyimpan))
+            } else {
+                toast(getString(R.string.terjadi_kesalahan))
+            }
+        }
 
     }
 
@@ -240,8 +240,10 @@ class TambahIklanFragment : Fragment() {
 
     private fun generateQrCode() {
         doAsync {
-            val text = id_iklan?.text.toString()
-            val encryptText = encryption?.encryptOrNull(text)
+
+            idIklan = id_iklan.text.toString().toLowerCase().replace(" ", "");
+
+            val encryptText = encryption?.encryptOrNull(idIklan)
             finalText = "$encryptText Download Jepara Advertiser di Google Play Store"
 
             val qrcode = QRCode.from(finalText)
@@ -250,6 +252,7 @@ class TambahIklanFragment : Fragment() {
 
             uiThread {
                 qr_code_image?.setImageBitmap(qrcode)
+                raw_qrcode.setText(finalText, TextView.BufferType.EDITABLE)
                 visibility(View.VISIBLE)
             }
         }

@@ -16,5 +16,8 @@ class Constant {
         val IKLAN = "iklan"
         val ARTIKEL = "artikel"
         val CLIPBOARD = "clipboard"
+        val EDISI_BULAN_INI = "edisi_bulan_ini"
+        val ITEM = "item"
+        val WRITE_STORAGE_CODE = 102
     }
 }

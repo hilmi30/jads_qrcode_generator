@@ -12,6 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/qrcode_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_gravity="center"
+            android:contentDescription="@string/qrcodeimage"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/edit_simpan_qrcode"
+            style="?android:attr/buttonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/simpan_qr_code"
+            android:textAllCaps="false"
+            android:layout_marginBottom="20dp"/>
+
         <TextView
             android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
@@ -41,46 +59,46 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/latitude"/>
+            android:text="@string/latitude_wajib"/>
 
         <EditText
             android:id="@+id/edit_lat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:hint="@string/latitude"
             android:layout_marginBottom="15dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/longitude"/>
+            android:text="@string/longitude_wajib"/>
 
         <EditText
             android:id="@+id/edit_lng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:hint="@string/longitude"
             android:layout_marginBottom="15dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nomor_telp"/>
+            android:text="@string/nomor_telp_wajib_diawali_62"/>
 
         <EditText
             android:id="@+id/edit_nomor_telp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:hint="@string/nomor_telp"
             android:layout_marginBottom="15dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/url_iklan"/>
+            android:text="@string/url_wajib_diawali_dengan_https"/>
 
         <EditText
             android:id="@+id/edit_link_iklan"
@@ -111,10 +129,11 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/paste_btn"
+                android:visibility="gone"
+                android:id="@+id/copy_edit_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/paste"
+                android:text="@string/copy"
                 android:textAllCaps="false"
                 android:layout_weight="3"/>
 

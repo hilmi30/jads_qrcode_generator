@@ -20,8 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.EditIklanActivity"
+        <activity
+            android:name=".activity.EditIklanActivity"
             android:parentActivityName=".activity.EditIklanActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.TambahIklanActivity"
+            android:parentActivityName=".activity.TambahIklanActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.TambahEditOverviewActivity"
+            android:parentActivityName=".activity.TambahEditOverviewActivity"
             android:windowSoftInputMode="stateHidden"/>
     </application>
 

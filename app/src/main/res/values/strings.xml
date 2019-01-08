@@ -8,12 +8,14 @@
     <string name="keys_length">keys length</string>
     <string name="encrypt_length">encrypt length</string>
     <string name="https">https://</string>
-    <string name="url_wajib_diawali_dengan_https">URL wajib diawali dengan https:// atau http://</string>
+    <string name="url_wajib_diawali_dengan_https">URL (Wajib diawali dengan https:// atau http://)</string>
     <string name="masukkan_nama_qrcode">Nama QRCode</string>
-    <string name="masukkan_id_iklan">Masukkan ID Iklan</string>
+    <string name="masukkan_id_iklan">Masukkan ID Iklan (singkat, tanpa spasi, huruf kecil)</string>
     <string name="kategori_iklan">Kategori Iklan</string>
+    <string name="latitude_wajib">Latitude (Contoh : -6.335234)</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="longitude_wajib">Longitude (Contoh : 110.335234)</string>
     <string name="nomor_telp">Nomor Telp</string>
     <string name="url_iklan">URL Iklan</string>
     <string name="id_iklan">ID Iklan</string>
@@ -39,4 +41,14 @@
     <string name="berhasil_paste">Berhasil di paste</string>
     <string name="berhasil_copy">Berhasil di copy</string>
     <string name="berhasil_simpan">Berhasil disimpan</string>
+    <string name="tambah_iklan">Tambah Iklan</string>
+    <string name="tambah_overview">Tambah Overview</string>
+    <string name="item_overview">Item Overview</string>
+    <string name="terjadi_kesalahan">Terjadi kesalahan</string>
+    <string name="berhasil_menyimpan">Berhasil menyimpan</string>
+    <string name="item_kosong">Item tidak boleh kosong</string>
+    <string name="simpan_item">Simpan item?</string>
+    <string name="hapus_berhasil">Hapus berhasil</string>
+    <string name="qrcodeimage">qrcodeImage</string>
+    <string name="nomor_telp_wajib_diawali_62">Nomor Telp (Wajib diawali +62 atau kode lain)</string>
 </resources>

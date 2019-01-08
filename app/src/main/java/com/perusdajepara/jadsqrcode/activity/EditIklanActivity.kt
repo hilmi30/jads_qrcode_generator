@@ -1,7 +1,19 @@
 package com.perusdajepara.jadsqrcode.activity
 
+import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.media.MediaScannerConnection
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,15 +21,19 @@ import android.widget.TextView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.perusdajepara.jadsqrcode.Constant
+import com.perusdajepara.jadsqrcode.Constant.Companion.WRITE_STORAGE_CODE
 import com.perusdajepara.jadsqrcode.model.IklanData
 import com.perusdajepara.jadsqrcode.R
 import com.perusdajepara.jadsqrcode.Validasi
-import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_edit_iklan.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.ctx
+import kotlinx.android.synthetic.main.activity_tambah_iklan.*
+import net.glxn.qrgen.android.QRCode
+import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.toast
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class EditIklanActivity : AppCompatActivity() {
 
@@ -41,6 +57,8 @@ class EditIklanActivity : AppCompatActivity() {
         val lngIklan = intent.getStringExtra(Constant.LNG)
         val kategoriIklan = intent.getStringExtra(Constant.KATEGORI)
         val rawIklan = intent.getStringExtra(Constant.RAW)
+
+        generateQrCode(rawIklan)
 
         val kategoriData = listOf("IKLAN", "ARTIKEL")
         val kategoriAdapter = ArrayAdapter<String>(ctx, R.layout.support_simple_spinner_dropdown_item, kategoriData)
@@ -119,9 +137,76 @@ class EditIklanActivity : AppCompatActivity() {
             }
         }
 
-        paste_btn.onClick {
-            edit_raw_iklan.setText(Paper.book().read<String>(Constant.CLIPBOARD))
-            toast(getString(R.string.berhasil_paste))
+        copy_edit_btn.onClick {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("copytext", edit_raw_iklan.text)
+            clipboard.primaryClip = clip
+
+            toast("Tersalin")
+        }
+
+        edit_simpan_qrcode.onClick {
+            if(ContextCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this@EditIklanActivity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_STORAGE_CODE)
+            } else {
+                alert {
+                    title = "Simpan QR Code"
+                    message = "Yakin ingin simpan?"
+                    positiveButton(getString(R.string.ya)) {
+                        saveImageToStorage()
+                    }
+                    negativeButton(getString(R.string.tidak)) {
+
+                    }
+                }.show()
+            }
+        }
+    }
+
+    private fun generateQrCode(raw: String) {
+        val qrcode = QRCode.from(raw)
+                .withSize(600, 600)
+                .bitmap()
+
+        qrcode_image.setImageBitmap(qrcode)
+    }
+
+    private fun saveImageToStorage() {
+        doAsync {
+
+            val idIklan = intent.getStringExtra(Constant.ID)
+
+            val bitmap = (qrcode_image?.drawable as BitmapDrawable).bitmap
+            val bytes = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+
+            val root = Environment.getExternalStorageDirectory()
+            val refDir = File(root, "/JADS_QRCODES")
+            refDir.mkdir()
+            var fileOutputStream: FileOutputStream? = null
+
+            try {
+                val file = File(refDir, "$idIklan.jpg")
+                file.createNewFile()
+                fileOutputStream = FileOutputStream(file)
+                fileOutputStream.write(bytes.toByteArray())
+
+                MediaScannerConnection.scanFile(ctx, arrayOf(file.absolutePath), null, null)
+                MediaStore.Images.Media.insertImage(ctx.contentResolver, bitmap, "", null)
+                uiThread {
+                    ctx.toast(file.absolutePath)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            } finally {
+                if(fileOutputStream != null){
+                    try {
+                        fileOutputStream.close()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
         }
     }
 }
